@@ -5,6 +5,7 @@ pipeline {
         maven '3.6.3'
         jdk '8u262'
     }
+
     stages {
         stage ('Initialize') {
             steps {
@@ -34,7 +35,7 @@ pipeline {
                         sh "mv slimeworldmanager-plugin/*.jar output/"
                         sh "mv slimeworldmanager-importer/*.jar output/"
                         archiveArtifacts artifacts: 'output/*'
-                    },
+                    }
               }
         }
 
