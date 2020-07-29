@@ -15,8 +15,8 @@ pipeline {
           }
         }
     tools {
-        maven 'maven'
-        jdk 'java'
+        maven '3.6.3'
+        jdk '8u221'
     }
     stages {
         stage ('Initialize') {
@@ -31,33 +31,10 @@ pipeline {
 
         stage ('Build') {
             steps {
-                dir('network'){
+                dir('.'){
                     sh 'mvn -Dmaven.test.failure.ignore=true install'
                 }
             }
-        }
-
-        stage('Create plugins.zip') {
-            steps {
-                dir('network'){
-                    echo 'Creating plugins.zip file...';
-                    sh 'mkdir -p temp';
-                    sh 'cp -r target/* temp/';
-                    zip archive: true, dir: 'temp', zipFile: 'plugins.zip';
-                    sh 'rm -r temp/';
-                }
-            }
-        }
-
-        stage('Release') {
-              steps {
-                    dir('network'){
-                        echo 'Creating release file...';
-                        sh "mkdir -p output"
-                        sh "mv target/* output/"
-                        archiveArtifacts artifacts: 'output/*'
-                    }
-              }
         }
 
         stage('CleanWorkspace') {
