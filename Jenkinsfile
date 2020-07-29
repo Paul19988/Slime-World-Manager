@@ -24,6 +24,21 @@ pipeline {
             }
         }
 
+        stage('Release') {
+              steps {
+                    dir('.'){
+                        echo 'Creating artifacts...';
+                        sh "mkdir -p output"
+                        sh "mv slimeworldmanager-api/*.jar output/"
+                        sh "mv slimeworldmanager-classmodifier/*.jar output/"
+                        sh "mv slimeworldmanager-plugin/*.jar output/"
+                        sh "mv slimeworldmanager-importer/*.jar output/"
+                        archiveArtifacts artifacts: 'output/*'
+                    },
+              }
+        }
+
+
         stage('CleanWorkspace') {
             steps {
                 cleanWs()
