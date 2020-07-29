@@ -7,12 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('CleanWorkspace') {
-            steps {
-                cleanWs()
-            }
-        }
-
         stage ('Initialize') {
             steps {
                 sh '''
@@ -44,7 +38,11 @@ pipeline {
                     }
               }
         }
-
+        stage('CleanWorkspace') {
+            steps {
+                cleanWs()
+            }
+        }
     }
 }
 
