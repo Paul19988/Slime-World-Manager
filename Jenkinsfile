@@ -30,10 +30,10 @@ pipeline {
                     dir('.'){
                         echo 'Creating artifacts...';
                         sh "mkdir -p output"
-                        sh "mv slimeworldmanager-api/*.jar output/"
-                        sh "mv slimeworldmanager-classmodifier/*.jar output/"
-                        sh "mv slimeworldmanager-plugin/*.jar output/"
-                        sh "mv slimeworldmanager-importer/*.jar output/"
+                        sh "mv slimeworldmanager-api/target/*.jar output/"
+                        sh "mv slimeworldmanager-classmodifier/target/*.jar output/"
+                        sh "mv slimeworldmanager-plugin/target/*.jar output/"
+                        sh "mv slimeworldmanager-importer/target/*.jar output/"
                         archiveArtifacts artifacts: 'output/*'
                     }
               }
