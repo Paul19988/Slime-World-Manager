@@ -1,11 +1,6 @@
 pipeline {
     agent any
-    options {
-        gitLabConnection('Gitlab')
-    }
-    triggers {
-        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
-    }
+
      post {
           failure {
             updateGitlabCommitStatus name: 'build', state: 'failed'
