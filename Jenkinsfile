@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-     post {
-          failure {
-          }
-          success {
-          }
-        }
     tools {
         maven '3.6.3'
         jdk '8u221'
