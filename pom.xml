@@ -113,10 +113,10 @@
             <id>releases</id>
             <url>https://repo.rapture.pw/repository/maven-releases/</url>
         </repository>
-        <repository>
+        <snapshotRepository>
             <id>snapshots</id>
             <url>https://repo.rapture.pw/repository/maven-snapshots/</url>
-        </repository>
+        </snapshotRepository>
   </distributionManagement>
 
 </project>
