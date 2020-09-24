@@ -12,6 +12,7 @@ import com.grinderwolf.swm.nms.CraftSlimeWorld;
 import com.grinderwolf.swm.nms.SlimeNMS;
 import com.grinderwolf.swm.nms.v1_16_R1.v1_16_R1SlimeNMS;
 import com.grinderwolf.swm.nms.v1_16_R2.v1_16_R2SlimeNMS;
+import com.grinderwolf.swm.nms.v1_16_R3.v1_16_R3SlimeNMS;
 import com.grinderwolf.swm.plugin.commands.CommandManager;
 import com.grinderwolf.swm.plugin.config.*;
 import com.grinderwolf.swm.plugin.loaders.LoaderUtils;
@@ -146,6 +147,13 @@ public class SWMPlugin extends JavaPlugin implements SlimePlugin {
     private SlimeNMS getNMSBridge() throws InvalidVersionException {
         String version = Bukkit.getServer().getClass().getPackage().getName();
         String nmsVersion = version.substring(version.lastIndexOf('.') + 1);
+
+        // nms version number didnt change, but with the new obfuscation mapping terms,
+        // i assume the mappings in spigot changed
+        // separate checking method for this reason
+        if (Bukkit.getMinecraftVersion().contains("1.16.3"))
+            return new v1_16_R3SligmeNMS();
+
         switch(nmsVersion) {
             case "v1_16_R1":
                 return new v1_16_R1SlimeNMS();

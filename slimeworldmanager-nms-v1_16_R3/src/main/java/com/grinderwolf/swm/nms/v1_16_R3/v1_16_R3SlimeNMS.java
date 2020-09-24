@@ -1,4 +1,4 @@
-package com.grinderwolf.swm.nms.v1_16_R2;
+package com.grinderwolf.swm.nms.v1_16_R3;
 
 import com.flowpowered.nbt.CompoundTag;
 import com.grinderwolf.swm.api.world.SlimeWorld;
@@ -37,7 +37,7 @@ import org.bukkit.event.world.WorldLoadEvent;
 import java.util.Collections;
 
 @Getter
-public class v1_16_R2SlimeNMS implements SlimeNMS {
+public class v1_16_R3SlimeNMS implements SlimeNMS {
 
     private static final Logger LOGGER = LogManager.getLogger("SWM");
 
@@ -49,7 +49,7 @@ public class v1_16_R2SlimeNMS implements SlimeNMS {
     private CustomWorldServer defaultNetherWorld;
     private CustomWorldServer defaultEndWorld;
 
-    public v1_16_R2SlimeNMS() {
+    public v1_16_R3SlimeNMS() {
         try {
             CraftCLSMBridge.initialize(this);
         } catch (NoClassDefFoundError ex) {
@@ -90,7 +90,7 @@ public class v1_16_R2SlimeNMS implements SlimeNMS {
         MinecraftServer mcServer = MinecraftServer.getServer();
         Convertable.ConversionSession conversionSession = getConversionSession(world.getName(), mcServer, worldDimensionKey);
         CustomNBTStorage dataManager = new CustomNBTStorage(world, conversionSession);
-        DimensionManager dimensionManager = mcServer.f.a().fromId(env.getId());
+        DimensionManager dimensionManager = mcServer.customRegistry.a().fromId(env.getId());
         WorldDataServer worldData = (WorldDataServer)dataManager.getWorldData();
         ResourceKey<net.minecraft.server.v1_16_R2.World> worldKey = ResourceKey.a(IRegistry.L, new MinecraftKey(world.getName()));
 
@@ -149,6 +149,11 @@ public class v1_16_R2SlimeNMS implements SlimeNMS {
     }
 
     @Override
+    public byte getWorldVersion() {
+        return 0;
+    }
+
+    @Override
     public CompoundTag convertChunk(CompoundTag tag) {
         NBTTagCompound nmsTag = (NBTTagCompound) Converter.convertTag(tag);
         int version = nmsTag.getInt("DataVersion");
@@ -191,7 +196,7 @@ public class v1_16_R2SlimeNMS implements SlimeNMS {
         Convertable.ConversionSession conversionSession = getConversionSession(worldName, mcServer, worldDimensionKey);
         CustomNBTStorage dataManager = new CustomNBTStorage(world, conversionSession);
 
-        DimensionManager dimensionManager = mcServer.f.a().a(dimensionManagerKey);
+        DimensionManager dimensionManager = mcServer.customRegistry.a().a(dimensionManagerKey);
         WorldDataServer worldData = (WorldDataServer)dataManager.getWorldData();
 
         CustomWorldServer server = null;
