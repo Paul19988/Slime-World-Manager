@@ -152,7 +152,7 @@ public class SWMPlugin extends JavaPlugin implements SlimePlugin {
         // i assume the mappings in spigot changed
         // separate checking method for this reason
         if (Bukkit.getMinecraftVersion().contains("1.16.3"))
-            return new v1_16_R3SligmeNMS();
+            return new v1_16_R3SlimeNMS();
 
         switch(nmsVersion) {
             case "v1_16_R1":
