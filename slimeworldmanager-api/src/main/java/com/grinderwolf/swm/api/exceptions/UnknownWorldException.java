@@ -1,12 +1,18 @@
 package com.grinderwolf.swm.api.exceptions;
 
-/**
- * Exception thrown when a
- * world could not be found.
- */
-public class UnknownWorldException extends SlimeException {
+import org.jetbrains.annotations.NotNull;
 
-    public UnknownWorldException(String world) {
-        super("Unknown world " + world);
-    }
+/**
+ * an exception class throws when a world could not be found.
+ */
+public final class UnknownWorldException extends SlimeException {
+
+  /**
+   * ctor.
+   *
+   * @param world the world.
+   */
+  public UnknownWorldException(@NotNull final String world) {
+    super(String.format("Unknown world %s", world));
+  }
 }

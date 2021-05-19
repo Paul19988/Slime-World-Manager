@@ -1,12 +1,18 @@
 package com.grinderwolf.swm.api.exceptions;
 
-/**
- * Exception thrown when a world
- * already exists inside a data source.
- */
-public class WorldAlreadyExistsException extends SlimeException {
+import org.jetbrains.annotations.NotNull;
 
-    public WorldAlreadyExistsException(String world) {
-        super("World " + world + " already exists!");
-    }
+/**
+ * an exception class throws when a world already exists inside a data source.
+ */
+public final class WorldAlreadyExistsException extends SlimeException {
+
+  /**
+   * ctor.
+   *
+   * @param world the world.
+   */
+  public WorldAlreadyExistsException(@NotNull final String world) {
+    super(String.format("World %s already exists!", world));
+  }
 }

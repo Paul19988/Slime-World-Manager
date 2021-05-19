@@ -1,18 +1,29 @@
 package com.grinderwolf.swm.api.exceptions;
 
 import java.io.File;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Exception thrown when a folder does
- * not contain a valid Minecraft world.
+ * an exception class throws when a folder does not contain a valid Minecraft world.
  */
-public class InvalidWorldException extends SlimeException {
+public final class InvalidWorldException extends SlimeException {
 
-    public InvalidWorldException(File worldDir, String reason) {
-        super("Directory " + worldDir.getPath() + " does not contain a valid MC world! " + reason);
-    }
+  /**
+   * ctor.
+   *
+   * @param worldDirectory the world directory.
+   * @param reason the reason.
+   */
+  public InvalidWorldException(@NotNull final File worldDirectory, @NotNull final String reason) {
+    super(String.format("Directory %s does not contain a valid MC world! %s", worldDirectory.getPath(), reason));
+  }
 
-    public InvalidWorldException(File worldDir) {
-        super("Directory " + worldDir.getPath() + " does not contain a valid MC world!");
-    }
+  /**
+   * ctor.
+   *
+   * @param worldDirectory the world directory.
+   */
+  public InvalidWorldException(@NotNull final File worldDirectory) {
+    super(String.format("Directory %s does not contain a valid MC world!", worldDirectory.getPath()));
+  }
 }

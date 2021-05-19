@@ -1,32 +1,33 @@
 package com.grinderwolf.swm.plugin.commands.sub;
 
+import java.util.List;
 import org.bukkit.command.CommandSender;
 
-import java.util.List;
+public final class DifficultyCmd implements Subcommand {
 
-public class DifficultyCmd implements Subcommand {
+  private final String description = "Changes world difficulty";
 
-    private final String usage = "difficulty <difficulty> (<world>)";
-    private final String description = "Changes world difficulty";
-    private final String permission = "swm.difficulty";
+  private final String permission = "swm.difficulty";
 
-    @Override
-    public boolean onCommand(CommandSender sender, String[] args) {
-        return false;
-    }
+  private final String usage = "difficulty <difficulty> (<world>)";
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, String[] args) {
-        return null;
-    }
+  @Override
+  public boolean onCommand(final CommandSender sender, final String[] args) {
+    return false;
+  }
 
-    @Override
-    public String getUsage() {
-        return null;
-    }
+  @Override
+  public List<String> onTabComplete(final CommandSender sender, final String[] args) {
+    return null;
+  }
 
-    @Override
-    public String getDescription() {
-        return null;
-    }
+  @Override
+  public String getUsage() {
+    return null;
+  }
+
+  @Override
+  public String getDescription() {
+    return null;
+  }
 }

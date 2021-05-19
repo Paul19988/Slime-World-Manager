@@ -1,12 +1,18 @@
 package com.grinderwolf.swm.api.exceptions;
 
-/**
- * Exception thrown when a world is locked
- * and is being accessed on write-mode.
- */
-public class WorldInUseException extends SlimeException {
+import org.jetbrains.annotations.NotNull;
 
-    public WorldInUseException(String world) {
-        super(world);
-    }
+/**
+ * an exception class throws when a world is locked and is being accessed on write-mode.
+ */
+public final class WorldInUseException extends SlimeException {
+
+  /**
+   * ctor.
+   *
+   * @param world the world.
+   */
+  public WorldInUseException(@NotNull final String world) {
+    super(world);
+  }
 }

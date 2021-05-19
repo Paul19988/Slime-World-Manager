@@ -1,15 +1,29 @@
 package com.grinderwolf.swm.api.exceptions;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
- * Generic SWM exception.
+ * an abstract class that represents SWM exceptions.
  */
-public class SlimeException extends Exception {
+public abstract class SlimeException extends Exception {
 
-    public SlimeException(String message) {
-        super(message);
-    }
+  /**
+   * ctor.
+   *
+   * @param message the message.
+   */
+  protected SlimeException(@NotNull final String message) {
+    super(message);
+  }
 
-    public SlimeException(String message, Exception ex) {
-        super(message, ex);
-    }
+  /**
+   * ctor.
+   *
+   * @param message the message.
+   * @param exception the exception.
+   */
+  protected SlimeException(@NotNull final String message, @Nullable final Exception exception) {
+    super(message, exception);
+  }
 }

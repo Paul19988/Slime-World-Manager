@@ -5,9 +5,9 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class ChunkEntry {
+final class ChunkEntry {
 
-    private final int offset;
-    private final int paddedSize;
+  private final int offset;
 
+  private final int paddedSize;
 }

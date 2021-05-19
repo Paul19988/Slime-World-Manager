@@ -1,48 +1,38 @@
 package com.grinderwolf.swm.plugin.commands.sub;
 
-
 import com.grinderwolf.swm.plugin.config.ConfigManager;
 import com.grinderwolf.swm.plugin.log.Logging;
-import lombok.Getter;
-import ninja.leaping.configurate.objectmapping.ObjectMappingException;
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class ReloadConfigCmd implements Subcommand {
+@RequiredArgsConstructor
+public final class ReloadConfigCmd implements Subcommand {
 
-    private final String usage = "reload";
-    private final String description = "Reloads the config files.";
-    private final String permission = "swm.reload";
+  private final String description = "Reloads the config files.";
 
-    @Override
-    public boolean onCommand(CommandSender sender, String[] args) {
-        try {
-            ConfigManager.initialize();
-        } catch (IOException | ObjectMappingException ex) {
-            if (!(sender instanceof ConsoleCommandSender)) {
-                sender.sendMessage(Logging.COMMAND_PREFIX + ChatColor.RED + "Failed to reload the config file. Take a look at the server console for more information.");
-            }
+  private final String permission = "swm.reload";
 
-            Logging.error("Failed to load config files:");
-            ex.printStackTrace();
+  @NotNull
+  private final Plugin plugin;
 
-            return true;
-        }
+  private final String usage = "reload";
 
-        sender.sendMessage(Logging.COMMAND_PREFIX + ChatColor.GREEN + "Config reloaded.");
+  @Override
+  public boolean onCommand(final CommandSender sender, final String[] args) {
+    ConfigManager.initialize(this.plugin);
+    sender.sendMessage(Logging.COMMAND_PREFIX + ChatColor.GREEN + "Config reloaded.");
+    return true;
+  }
 
-        return true;
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, String[] args) {
-        return Collections.emptyList();
-    }
+  @Override
+  public List<String> onTabComplete(final CommandSender sender, final String[] args) {
+    return Collections.emptyList();
+  }
 }
-

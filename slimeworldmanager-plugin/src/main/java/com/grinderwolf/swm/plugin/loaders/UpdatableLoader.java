@@ -1,21 +1,20 @@
 package com.grinderwolf.swm.plugin.loaders;
 
 import com.grinderwolf.swm.api.loaders.SlimeLoader;
+import java.io.IOException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.io.IOException;
-
 public abstract class UpdatableLoader implements SlimeLoader {
 
-    public abstract void update() throws NewerDatabaseException, IOException;
+  public abstract void update() throws NewerDatabaseException, IOException;
 
-    @Getter
-    @RequiredArgsConstructor
-    public class NewerDatabaseException extends Exception {
+  @Getter
+  @RequiredArgsConstructor
+  public static final class NewerDatabaseException extends Exception {
 
-        private final int currentVersion;
-        private final int databaseVersion;
+    private final int currentVersion;
 
-    }
+    private final int databaseVersion;
+  }
 }

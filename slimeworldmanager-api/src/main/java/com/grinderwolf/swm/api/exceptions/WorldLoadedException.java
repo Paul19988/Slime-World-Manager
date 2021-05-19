@@ -1,12 +1,18 @@
 package com.grinderwolf.swm.api.exceptions;
 
-/**
- * Exception thrown when a world is loaded
- * when trying to import it.
- */
-public class WorldLoadedException extends SlimeException {
+import org.jetbrains.annotations.NotNull;
 
-    public WorldLoadedException(String worldName) {
-        super("World " + worldName + " is loaded! Unload it before importing it.");
-    }
+/**
+ * an exception class that throws when a world is loaded when trying to import it.
+ */
+public final class WorldLoadedException extends SlimeException {
+
+  /**
+   * ctor.
+   *
+   * @param world the world.
+   */
+  public WorldLoadedException(@NotNull final String world) {
+    super(String.format("World %s is loaded! Unload it before importing it.", world));
+  }
 }

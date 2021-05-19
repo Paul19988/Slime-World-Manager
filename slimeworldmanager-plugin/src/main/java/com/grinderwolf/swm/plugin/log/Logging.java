@@ -1,22 +1,26 @@
 package com.grinderwolf.swm.plugin.log;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.NotNull;
 
+@UtilityClass
 public class Logging {
 
-    public static final String COMMAND_PREFIX = ChatColor.BLUE + ChatColor.BOLD.toString() + "SWM " + ChatColor.GRAY + ">> ";
-    private static final String CONSOLE_PREFIX = ChatColor.BLUE + "[SWM] ";
+  public final String COMMAND_PREFIX = ChatColor.BLUE + ChatColor.BOLD.toString() + "SWM " + ChatColor.GRAY + ">> ";
 
-    public static void info(String message) {
-        Bukkit.getConsoleSender().sendMessage(CONSOLE_PREFIX + ChatColor.GRAY + message);
-    }
+  private final String CONSOLE_PREFIX = ChatColor.BLUE + "[SWM] ";
 
-    public static void warning(String message) {
-        Bukkit.getConsoleSender().sendMessage(CONSOLE_PREFIX + ChatColor.YELLOW + message);
-    }
+  public void error(@NotNull final String message) {
+    Bukkit.getConsoleSender().sendMessage(Logging.CONSOLE_PREFIX + ChatColor.RED + message);
+  }
 
-    public static void error(String message) {
-        Bukkit.getConsoleSender().sendMessage(CONSOLE_PREFIX + ChatColor.RED + message);
-    }
+  public void info(@NotNull final String message) {
+    Bukkit.getConsoleSender().sendMessage(Logging.CONSOLE_PREFIX + ChatColor.GRAY + message);
+  }
+
+  public void warning(@NotNull final String message) {
+    Bukkit.getConsoleSender().sendMessage(Logging.CONSOLE_PREFIX + ChatColor.YELLOW + message);
+  }
 }

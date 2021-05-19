@@ -1,38 +1,28 @@
 package com.grinderwolf.swm.plugin.config;
 
-import com.google.common.reflect.TypeToken;
-import com.grinderwolf.swm.plugin.log.Logging;
-import lombok.Data;
-import lombok.Getter;
-import ninja.leaping.configurate.objectmapping.ObjectMappingException;
-import ninja.leaping.configurate.objectmapping.Setting;
-import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
+import io.github.portlek.configs.ConfigHolder;
+import io.github.portlek.configs.ConfigLoader;
+import io.github.portlek.configs.annotation.Route;
+import io.github.portlek.configs.yaml.YamlType;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
+public final class MainConfig implements ConfigHolder {
 
-@Data
-@ConfigSerializable
-public class MainConfig {
-    @Setting("updater")
-    private UpdaterOptions updaterOptions = new UpdaterOptions();
+  public static Update update = new Update();
 
-    @Getter
-    @ConfigSerializable
-    public static class UpdaterOptions {
+  static void load(@NotNull final Plugin plugin) {
+    ConfigLoader.builder("main", plugin.getDataFolder(), YamlType.get())
+      .setConfigHolder(new MainConfig())
+      .build()
+      .load(true);
+  }
 
-        @Setting(value = "enabled")
-        private final boolean enabled = true;
+  public static final class Update implements ConfigHolder {
 
-        @Setting(value = "onjoinmessage")
-        private final boolean messageEnabled = true;
-    }
+    public static boolean enabled = true;
 
-    public void save() {
-        try {
-            ConfigManager.getMainConfigLoader().save(ConfigManager.getMainConfigLoader().createEmptyNode().setValue(TypeToken.of(MainConfig.class), this));
-        } catch (IOException | ObjectMappingException ex) {
-            Logging.error("Failed to save worlds config file:");
-            ex.printStackTrace();
-        }
-    }
+    @Route("onjoinmessage")
+    public static boolean onJoinMessage = true;
+  }
 }

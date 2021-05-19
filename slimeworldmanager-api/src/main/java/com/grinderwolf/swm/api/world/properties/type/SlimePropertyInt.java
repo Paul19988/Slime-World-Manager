@@ -1,32 +1,50 @@
 package com.grinderwolf.swm.api.world.properties.type;
 
-import com.flowpowered.nbt.*;
+import com.flowpowered.nbt.CompoundMap;
+import com.flowpowered.nbt.IntTag;
+import com.flowpowered.nbt.Tag;
 import com.grinderwolf.swm.api.world.properties.SlimeProperty;
-
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A slime property of type integer
  */
-public class SlimePropertyInt extends SlimeProperty<Integer> {
+public final class SlimePropertyInt extends SlimeProperty<Integer> {
 
-	public SlimePropertyInt(String nbtName, Integer defaultValue) {
-		super(nbtName, defaultValue);
-	}
+  /**
+   * ctor.
+   *
+   * @param nbtName the nbt name.
+   * @param defaultValue the default value.
+   */
+  public SlimePropertyInt(@NotNull final String nbtName, final int defaultValue) {
+    super(nbtName, defaultValue);
+  }
 
-	public SlimePropertyInt(String nbtName, Integer defaultValue, Function<Integer, Boolean> validator) {
-		super(nbtName, defaultValue, validator);
-	}
+  /**
+   * ctor.
+   *
+   * @param nbtName the nbt name.
+   * @param defaultValue the default value.
+   * @param validator the validator.
+   */
+  public SlimePropertyInt(@NotNull final String nbtName, final int defaultValue,
+                          @Nullable final Function<Integer, Boolean> validator) {
+    super(nbtName, defaultValue, validator);
+  }
 
-	@Override
-	protected void writeValue(CompoundMap compound, Integer value) {
-		compound.put(getNbtName(), new IntTag(getNbtName(), value));
-	}
+  @NotNull
+  @Override
+  protected Integer readValue(@NotNull final Tag<?> compoundTag) {
+    return compoundTag.getAsIntTag()
+      .map(Tag::getValue)
+      .orElse(this.getDefaultValue());
+  }
 
-	@Override
-	protected Integer readValue(Tag<?> compoundTag) {
-		return compoundTag.getAsIntTag()
-			.map(Tag::getValue)
-			.orElse(getDefaultValue());
-	}
+  @Override
+  protected void writeValue(@NotNull final CompoundMap compoundMap, @NotNull final Integer value) {
+    compoundMap.put(this.getNbtName(), new IntTag(this.getNbtName(), value));
+  }
 }

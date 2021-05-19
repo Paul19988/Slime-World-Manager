@@ -1,12 +1,18 @@
 package com.grinderwolf.swm.api.exceptions;
 
-/**
- * Exception thrown when SWM is loaded
- * on a non-supported Spigot version.
- */
-public class InvalidVersionException extends SlimeException {
+import org.jetbrains.annotations.NotNull;
 
-    public InvalidVersionException(String version) {
-        super("SlimeWorldManager does not support Spigot " + version + "!");
-    }
+/**
+ * an exception class throws when SWM is loaded on a non-supported Spigot version.
+ */
+public final class InvalidVersionException extends SlimeException {
+
+  /**
+   * ctor.
+   *
+   * @param version the version.
+   */
+  public InvalidVersionException(@NotNull final String version) {
+    super(String.format("SlimeWorldManager does not support Spigot %s!", version));
+  }
 }

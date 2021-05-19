@@ -1,24 +1,23 @@
 package com.grinderwolf.swm.plugin.commands.sub;
 
-import org.bukkit.command.CommandSender;
-
 import java.util.List;
+import org.bukkit.command.CommandSender;
 
 public interface Subcommand {
 
-    boolean onCommand(CommandSender sender, String[] args);
+  String getDescription();
 
-    List<String> onTabComplete(CommandSender sender, String[] args);
+  default String getPermission() {
+    return "";
+  }
 
-    String getUsage();
+  String getUsage();
 
-    String getDescription();
+  default boolean inGameOnly() {
+    return false;
+  }
 
-    default boolean inGameOnly() {
-        return false;
-    }
+  boolean onCommand(CommandSender sender, String[] args);
 
-    default String getPermission() {
-        return "";
-    }
+  List<String> onTabComplete(CommandSender sender, String[] args);
 }

@@ -1,11 +1,11 @@
 package com.grinderwolf.swm.api.world.properties;
 
 import com.flowpowered.nbt.CompoundMap;
-import com.flowpowered.nbt.CompoundTag;
 import com.flowpowered.nbt.Tag;
-import lombok.Getter;
-
 import java.util.function.Function;
+import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A property describing behavior of a slime world.
@@ -13,34 +13,74 @@ import java.util.function.Function;
 @Getter
 public abstract class SlimeProperty<T> {
 
-    private final String nbtName;
-    private final T defaultValue;
-    private final Function<T, Boolean> validator;
+  /**
+   * the default value.
+   */
+  private final T defaultValue;
 
-    protected SlimeProperty(String nbtName, T defaultValue) {
-        this(nbtName, defaultValue, null);
+  /**
+   * the nbt name.
+   */
+  @NotNull
+  private final String nbtName;
+
+  /**
+   * the validator.
+   */
+  @Nullable
+  private final Function<T, Boolean> validator;
+
+  /**
+   * ctor.
+   *
+   * @param nbtName the nbt name.
+   * @param defaultValue the default value.
+   */
+  protected SlimeProperty(@NotNull final String nbtName, @NotNull final T defaultValue) {
+    this(nbtName, defaultValue, null);
+  }
+
+  /**
+   * ctor.
+   *
+   * @param nbtName the nbt name.
+   * @param defaultValue the default value.
+   * @param validator the validator.
+   */
+  protected SlimeProperty(@NotNull final String nbtName, @NotNull final T defaultValue,
+                          @Nullable final Function<T, Boolean> validator) {
+    this.nbtName = nbtName;
+    if (validator != null && !validator.apply(defaultValue)) {
+      throw new IllegalArgumentException(String.format("Invalid default value for property %s! %s",
+        nbtName, defaultValue));
     }
+    this.defaultValue = defaultValue;
+    this.validator = validator;
+  }
 
-    protected SlimeProperty(String nbtName, T defaultValue, Function<T, Boolean> validator) {
-        this.nbtName = nbtName;
+  @Override
+  public final String toString() {
+    return "SlimeProperty{" +
+      "nbtName='" + this.nbtName + '\'' +
+      ", defaultValue=" + this.defaultValue +
+      '}';
+  }
 
-        if (defaultValue != null && validator != null && !validator.apply(defaultValue)) {
-            throw new IllegalArgumentException("Invalid default value for property " + nbtName + "! " + defaultValue);
-        }
+  /**
+   * reads the compound tag values.
+   *
+   * @param compoundTag the compound tag to read.
+   *
+   * @return value.
+   */
+  @NotNull
+  protected abstract T readValue(@NotNull Tag<?> compoundTag);
 
-        this.defaultValue = defaultValue;
-        this.validator = validator;
-    }
-
-    protected abstract void writeValue(CompoundMap compound, T value);
-
-    protected abstract T readValue(Tag<?> compoundTag);
-
-    @Override
-    public String toString() {
-        return "SlimeProperty{" +
-            "nbtName='" + nbtName + '\'' +
-            ", defaultValue=" + defaultValue +
-            '}';
-    }
+  /**
+   * writes the value into the compound map.
+   *
+   * @param compoundMap the compound map to write.
+   * @param value the value to write.
+   */
+  protected abstract void writeValue(@NotNull CompoundMap compoundMap, @NotNull T value);
 }
