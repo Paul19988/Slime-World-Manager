@@ -59,7 +59,7 @@ public final class CreateWorldCmd implements Subcommand {
       Bukkit.getScheduler().runTaskAsynchronously(SWMPlugin.getInstance(), () -> {
         try {
           final long start = System.currentTimeMillis();
-          final WorldData worldData = new WorldData(worldName, dataSource, "0, 64, 0");
+          final WorldData worldData = new WorldData(worldName, dataSource, "0, 65, 0");
           final SlimePropertyMap propertyMap = worldData.toPropertyMap();
           final SlimeWorld slimeWorld = SWMPlugin.getInstance().createEmptyWorld(loader, worldName, false, propertyMap);
           Bukkit.getScheduler().runTask(SWMPlugin.getInstance(), () -> {
