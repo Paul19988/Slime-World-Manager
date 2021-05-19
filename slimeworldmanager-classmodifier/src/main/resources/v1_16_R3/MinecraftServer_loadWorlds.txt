@@ -31,7 +31,7 @@
             net.minecraft.server.v1_16_R3.WorldDataServer worlddata;
 
             if (world == null) {
-                java.lang.String worldType = org.bukkit.World.Environment.getEnvironment(dimension).toString().toLowerCase(Locale.ROOT);
+                java.lang.String worldType = org.bukkit.World.Environment.getEnvironment(dimension).toString().toLowerCase(java.util.Locale.ROOT);
                 java.lang.String name = dimension == 0 ? $1 : $1 + "_" + worldType;
                 net.minecraft.server.v1_16_R3.Convertable.ConversionSession worldSession;
 

@@ -31,7 +31,7 @@
                 }
             }
 
-            java.lang.String worldType = org.bukkit.World.Environment.getEnvironment(dimension).toString().toLowerCase(Locale.ROOT);
+            java.lang.String worldType = org.bukkit.World.Environment.getEnvironment(dimension).toString().toLowerCase(java.util.java.util.Locale.ROOT);
             java.lang.String name = (dimension == 0) ? $1 : $1 + "_" + worldType;
             net.minecraft.server.v1_16_R1.Convertable.ConversionSession worldSession;
             if (dimension == 0) {
