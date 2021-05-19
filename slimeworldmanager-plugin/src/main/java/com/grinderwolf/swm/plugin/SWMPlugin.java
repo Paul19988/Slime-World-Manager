@@ -10,6 +10,7 @@ import static com.grinderwolf.swm.api.world.properties.SlimeProperties.SPAWN_Y;
 import static com.grinderwolf.swm.api.world.properties.SlimeProperties.SPAWN_Z;
 import com.flowpowered.nbt.CompoundMap;
 import com.flowpowered.nbt.CompoundTag;
+import com.github.luben.zstd.util.Native;
 import com.grinderwolf.swm.api.SlimePlugin;
 import com.grinderwolf.swm.api.exceptions.CorruptedWorldException;
 import com.grinderwolf.swm.api.exceptions.InvalidVersionException;
@@ -253,6 +254,7 @@ public final class SWMPlugin extends JavaPlugin implements SlimePlugin {
 
   @Override
   public void onLoad() {
+    Native.load();
     SWMPlugin.isPaperMC = SWMPlugin.checkIsPaper();
     ConfigManager.initialize(this);
     LoaderUtils.registerLoaders();
