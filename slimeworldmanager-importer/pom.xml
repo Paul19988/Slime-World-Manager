@@ -31,8 +31,8 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.grinderwolf</groupId>
-      <artifactId>slimeworldmanager-nms-common</artifactId>
+      <groupId>com.grinderwolf.slimeworldmanager-nms</groupId>
+      <artifactId>common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

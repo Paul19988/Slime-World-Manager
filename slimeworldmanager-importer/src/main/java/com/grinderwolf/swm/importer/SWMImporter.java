@@ -461,7 +461,7 @@ public final class SWMImporter {
     for (final SlimeChunkSection section : sectionArray) {
       if (section != null) { // Chunk isn't empty
         return new CraftSlimeChunk(
-          null, chunkX, chunkZ, sectionArray, heightMapsCompound, biomes, tileEntities, entities);
+          biomes, entities, heightMapsCompound, sectionArray, tileEntities, null, chunkX, chunkZ);
       }
     }
     // Chunk is empty
