@@ -85,8 +85,8 @@ public final class WorldData implements DataSerializer {
     final boolean readOnly = section.getBoolean("readOnly");
     final boolean loadOnStartup = section.getBoolean("loadOnStartup");
     final boolean dragonBattle = section.getBoolean("dragonBattle");
-    return Optional.of(new WorldData(allowAnimals, allowMonsters, dataSource, defaultBiome, difficulty, dragonBattle,
-      environment, loadOnStartup, pvp, readOnly, spawn, worldName, worldType));
+    return Optional.of(new WorldData(allowAnimals, allowMonsters, defaultBiome, difficulty, dragonBattle,
+      environment, loadOnStartup, pvp, readOnly, spawn, worldName, worldType, dataSource));
   }
 
   @Override
