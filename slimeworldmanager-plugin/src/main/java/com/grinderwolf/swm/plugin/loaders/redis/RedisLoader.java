@@ -12,8 +12,8 @@ import java.util.List;
 
 public class RedisLoader implements SlimeLoader {
 
-    private static final String WORLD_DATA_PREFIX = "skyblock_world_data_";
-    private static final String WORLD_LOCK_PREFIX = "skyblock_world_lock_";
+    private static final String WORLD_DATA_PREFIX = "aswm_world_data_";
+    private static final String WORLD_LOCK_PREFIX = "aswm_world_lock_";
     private static final byte TRUE = 0x1;
     private static final byte FALSE = 0x0;
 
