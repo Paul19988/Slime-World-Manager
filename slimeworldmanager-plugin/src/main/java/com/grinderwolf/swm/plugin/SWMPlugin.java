@@ -24,8 +24,6 @@ import com.grinderwolf.swm.plugin.upgrade.WorldUpgrader;
 import com.grinderwolf.swm.plugin.world.WorldUnlocker;
 import com.grinderwolf.swm.plugin.world.importer.WorldImporter;
 import lombok.Getter;
-import ninja.leaping.configurate.objectmapping.ObjectMappingException;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.World;
@@ -64,7 +62,7 @@ public class SWMPlugin extends JavaPlugin implements SlimePlugin {
 
         try {
             ConfigManager.initialize();
-        } catch (NullPointerException | IOException | ObjectMappingException ex) {
+        } catch (NullPointerException | IOException ex) {
             Logging.error("Failed to load config files:");
             ex.printStackTrace();
             return;
@@ -116,8 +114,6 @@ public class SWMPlugin extends JavaPlugin implements SlimePlugin {
             this.setEnabled(false);
             return;
         }
-
-        new Metrics(this);
 
         final CommandManager commandManager = new CommandManager();
         final PluginCommand swmCommand = getCommand("swm");

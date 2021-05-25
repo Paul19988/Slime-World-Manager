@@ -21,8 +21,6 @@
         <dependency>
             <groupId>com.github.luben</groupId>
             <artifactId>zstd-jni</artifactId>
-            <version>1.4.9-5</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -31,5 +29,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
 </project>
